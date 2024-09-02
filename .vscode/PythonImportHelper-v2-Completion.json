@@ -1,19 +1,10 @@
 [
     {
-        "label": "os",
-        "kind": 6,
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "OpenAI",
-        "importPath": "openai",
-        "description": "openai",
-        "isExtraImport": true,
-        "detail": "openai",
+        "detail": "pydantic_settings",
         "documentation": {}
     },
     {
@@ -26,6 +17,119 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "obsidian_notes_dir",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "excluded_dirs",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "tags_file",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "timestamp_file",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "dry_run_generate_tag_list",
+        "importPath": "tag_generator",
+        "description": "tag_generator",
+        "isExtraImport": true,
+        "detail": "tag_generator",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "importPath": "openai_client",
+        "description": "openai_client",
+        "isExtraImport": true,
+        "detail": "openai_client",
+        "documentation": {}
+    },
+    {
+        "label": "load_existing_tags",
+        "importPath": "utils",
+        "description": "utils",
+        "isExtraImport": true,
+        "detail": "utils",
+        "documentation": {}
+    },
+    {
+        "label": "load_last_run_timestamp",
+        "importPath": "utils",
+        "description": "utils",
+        "isExtraImport": true,
+        "detail": "utils",
+        "documentation": {}
+    },
+    {
+        "label": "save_current_timestamp",
+        "importPath": "utils",
+        "description": "utils",
+        "isExtraImport": true,
+        "detail": "utils",
+        "documentation": {}
+    },
+    {
+        "label": "save_tags",
+        "importPath": "utils",
+        "description": "utils",
+        "isExtraImport": true,
+        "detail": "utils",
+        "documentation": {}
+    },
+    {
         "label": "time",
         "kind": 6,
         "isExtraImport": true,
@@ -35,137 +139,129 @@
         "documentation": {}
     },
     {
-        "label": "BaseSettings",
-        "importPath": "pydantic_settings",
-        "description": "pydantic_settings",
-        "isExtraImport": true,
-        "detail": "pydantic_settings",
-        "documentation": {}
-    },
-    {
         "label": "Settings",
         "kind": 6,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "class Settings(BaseSettings):\n    open_ai_api_key: str\n    class Config:\n        env_file = \".env\"\n        env_file_encoding = \"utf-8\"\nsettings = Settings()\nclient = OpenAI(api_key=settings.open_ai_api_key)\n# Directory containing your Obsidian notes\nobsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexluded_dirs = [",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "load_existing_tags",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def load_existing_tags():\n    if os.path.exists(tags_file):\n        with open(tags_file, \"r\") as f:\n            return set(f.read().splitlines())\n    return set()\ndef save_tags(tags):\n    with open(tags_file, \"w\") as f:\n        f.write(\"\\n\".join(sorted(tags)))\ndef load_last_run_timestamp():\n    if os.path.exists(timestamp_file):",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "save_tags",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def save_tags(tags):\n    with open(tags_file, \"w\") as f:\n        f.write(\"\\n\".join(sorted(tags)))\ndef load_last_run_timestamp():\n    if os.path.exists(timestamp_file):\n        with open(timestamp_file, \"r\") as f:\n            return float(f.read().strip())\n    return 0  # Return 0 if the file doesn't exist (indicating no previous run)\ndef save_current_timestamp():\n    with open(timestamp_file, \"w\") as f:",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "load_last_run_timestamp",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def load_last_run_timestamp():\n    if os.path.exists(timestamp_file):\n        with open(timestamp_file, \"r\") as f:\n            return float(f.read().strip())\n    return 0  # Return 0 if the file doesn't exist (indicating no previous run)\ndef save_current_timestamp():\n    with open(timestamp_file, \"w\") as f:\n        f.write(str(time.time()))\ndef generate_tags(content, existing_tags):\n    existing_tags_str = \" \".join(existing_tags)",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "save_current_timestamp",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def save_current_timestamp():\n    with open(timestamp_file, \"w\") as f:\n        f.write(str(time.time()))\ndef generate_tags(content, existing_tags):\n    existing_tags_str = \" \".join(existing_tags)\n    response = client.chat.completions.create(model=\"gpt-4\",\n    messages=[\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant that generates relevant tags for content, ensuring consistency with existing tags.\"",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "generate_tags",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def generate_tags(content, existing_tags):\n    existing_tags_str = \" \".join(existing_tags)\n    response = client.chat.completions.create(model=\"gpt-4\",\n    messages=[\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant that generates relevant tags for content, ensuring consistency with existing tags.\"\n        },\n        {\n            \"role\": \"user\",",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "dry_run_generate_tag_list",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def dry_run_generate_tag_list(directory, specific_file=None):\n    all_tags = load_existing_tags()\n    last_run_timestamp = load_last_run_timestamp()\n    if specific_file:\n        files_to_process = [specific_file]\n    else:\n        files_to_process = []\n        for root, _, files in os.walk(directory):\n            if any(excluded_dir in root for excluded_dir in exluded_dirs):\n                continue",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "parse_args",
-        "kind": 2,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "def parse_args():\n    parser = argparse.ArgumentParser(description=\"Generate tag list for Obsidian notes.\")\n    parser.add_argument(\n        \"-f\", \"--file\",\n        type=str,\n        help=\"Specific file to process\"\n    )\n    return parser.parse_args()\nif __name__ == \"__main__\":\n    args = parse_args()",
-        "detail": "tag",
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "class Settings(BaseSettings):\n    open_ai_api_key: str\n    class Config:\n        env_file = \".env\"\n        env_file_encoding = \"utf-8\"\nsettings = Settings()\n# Directory containing your Obsidian notes\nobsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexcluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"",
+        "detail": "src.config",
         "documentation": {}
     },
     {
         "label": "settings",
         "kind": 5,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "settings = Settings()\nclient = OpenAI(api_key=settings.open_ai_api_key)\n# Directory containing your Obsidian notes\nobsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"",
-        "detail": "tag",
-        "documentation": {}
-    },
-    {
-        "label": "client",
-        "kind": 5,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "client = OpenAI(api_key=settings.open_ai_api_key)\n# Directory containing your Obsidian notes\nobsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"\ndef load_existing_tags():",
-        "detail": "tag",
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "settings = Settings()\n# Directory containing your Obsidian notes\nobsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexcluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"",
+        "detail": "src.config",
         "documentation": {}
     },
     {
         "label": "obsidian_notes_dir",
         "kind": 5,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "obsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"\ndef load_existing_tags():\n    if os.path.exists(tags_file):\n        with open(tags_file, \"r\") as f:",
-        "detail": "tag",
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "obsidian_notes_dir = \"/Users/adamhaslip/Library/Mobile Documents/iCloud~md~obsidian/Documents/Adams Managed Vault\"\nexcluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"",
+        "detail": "src.config",
         "documentation": {}
     },
     {
-        "label": "exluded_dirs",
+        "label": "excluded_dirs",
         "kind": 5,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "exluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"\ndef load_existing_tags():\n    if os.path.exists(tags_file):\n        with open(tags_file, \"r\") as f:\n            return set(f.read().splitlines())",
-        "detail": "tag",
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "excluded_dirs = [\n    \"attachments\", \".obsidian\", \".trash\", \"🛠️ ~workspace\", \"🗄️~archive\"\n]\n# File to store and maintain the list of tags\ntags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"",
+        "detail": "src.config",
         "documentation": {}
     },
     {
         "label": "tags_file",
         "kind": 5,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "tags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"\ndef load_existing_tags():\n    if os.path.exists(tags_file):\n        with open(tags_file, \"r\") as f:\n            return set(f.read().splitlines())\n    return set()\ndef save_tags(tags):\n    with open(tags_file, \"w\") as f:\n        f.write(\"\\n\".join(sorted(tags)))",
-        "detail": "tag",
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "tags_file = \"tags.txt\"\ntimestamp_file = \"last_run_timestamp.txt\"",
+        "detail": "src.config",
         "documentation": {}
     },
     {
         "label": "timestamp_file",
         "kind": 5,
-        "importPath": "tag",
-        "description": "tag",
-        "peekOfCode": "timestamp_file = \"last_run_timestamp.txt\"\ndef load_existing_tags():\n    if os.path.exists(tags_file):\n        with open(tags_file, \"r\") as f:\n            return set(f.read().splitlines())\n    return set()\ndef save_tags(tags):\n    with open(tags_file, \"w\") as f:\n        f.write(\"\\n\".join(sorted(tags)))\ndef load_last_run_timestamp():",
-        "detail": "tag",
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "timestamp_file = \"last_run_timestamp.txt\"",
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
+        "label": "parse_args",
+        "kind": 2,
+        "importPath": "src.main",
+        "description": "src.main",
+        "peekOfCode": "def parse_args():\n    parser = argparse.ArgumentParser(description=\"Generate tag list for Obsidian notes.\")\n    parser.add_argument(\n        \"-f\", \"--file\",\n        type=str,\n        help=\"Specific file to process\"\n    )\n    return parser.parse_args()\nif __name__ == \"__main__\":\n    args = parse_args()",
+        "detail": "src.main",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "src.openai_client",
+        "description": "src.openai_client",
+        "peekOfCode": "client = OpenAI(api_key=settings.open_ai_api_key)",
+        "detail": "src.openai_client",
+        "documentation": {}
+    },
+    {
+        "label": "generate_tags",
+        "kind": 2,
+        "importPath": "src.tag_generator",
+        "description": "src.tag_generator",
+        "peekOfCode": "def generate_tags(content, existing_tags):\n    existing_tags_str = \" \".join(existing_tags)\n    response = client.chat.completions.create(model=\"gpt-4\",\n    messages=[\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant that generates relevant tags for content, ensuring consistency with existing tags.\"\n        },\n        {\n            \"role\": \"user\",",
+        "detail": "src.tag_generator",
+        "documentation": {}
+    },
+    {
+        "label": "dry_run_generate_tag_list",
+        "kind": 2,
+        "importPath": "src.tag_generator",
+        "description": "src.tag_generator",
+        "peekOfCode": "def dry_run_generate_tag_list(directory, specific_file=None):\n    all_tags = load_existing_tags()\n    last_run_timestamp = load_last_run_timestamp()\n    if specific_file:\n        files_to_process = [specific_file]\n    else:\n        files_to_process = []\n        for root, _, files in os.walk(directory):\n            if any(exclude_dir in root for exclude_dir in excluded_dirs):\n                continue",
+        "detail": "src.tag_generator",
+        "documentation": {}
+    },
+    {
+        "label": "load_existing_tags",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def load_existing_tags():\n    if os.path.exists(tags_file):\n        with open(tags_file, \"r\") as f:\n            return set(f.read().splitlines())\n    return set()\ndef save_tags(tags):\n    with open(tags_file, \"w\") as f:\n        f.write(\"\\n\".join(sorted(tags)))\ndef load_last_run_timestamp():\n    if os.path.exists(timestamp_file):",
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "save_tags",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def save_tags(tags):\n    with open(tags_file, \"w\") as f:\n        f.write(\"\\n\".join(sorted(tags)))\ndef load_last_run_timestamp():\n    if os.path.exists(timestamp_file):\n        with open(timestamp_file, \"r\") as f:\n            return float(f.read().strip())\n    return 0  # Return 0 if the file doesn't exist (indicating no previous run)\ndef save_current_timestamp():\n    with open(timestamp_file, \"w\") as f:",
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "load_last_run_timestamp",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def load_last_run_timestamp():\n    if os.path.exists(timestamp_file):\n        with open(timestamp_file, \"r\") as f:\n            return float(f.read().strip())\n    return 0  # Return 0 if the file doesn't exist (indicating no previous run)\ndef save_current_timestamp():\n    with open(timestamp_file, \"w\") as f:\n        f.write(str(time.time()))",
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "save_current_timestamp",
+        "kind": 2,
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "peekOfCode": "def save_current_timestamp():\n    with open(timestamp_file, \"w\") as f:\n        f.write(str(time.time()))",
+        "detail": "src.utils",
         "documentation": {}
     }
 ]
