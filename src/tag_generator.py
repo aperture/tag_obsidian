@@ -1,51 +1,37 @@
 import os
-from config import excluded_dirs
-from openai_client import client
-from utils import load_existing_tags, load_last_run_timestamp, save_current_timestamp, save_tags
+from typing import Optional, List, Set
+from config import excluded_dirs, logger
+from openai_client import openai_client
+from file_utils import get_existing_tags, get_last_run_timestamp, update_timestamp, save_tags, get_obsidian_file_path, is_obsidian_uri
 
-def generate_tags(content, existing_tags):
-    existing_tags_str = " ".join(existing_tags)
-
-    response = client.chat.completions.create(model="gpt-4",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant that generates relevant tags for content, ensuring consistency with existing tags."
-        },
-        {
-            "role": "user",
-            "content": f"Here are the existing tags: {existing_tags_str}. Please generate relevant hashtags for the following content:\n\n{content}, return each tag on a new line starting with a #"
-        }
-    ])
-
-    generated_tags = response.choices[0].message.content.splitlines()
-    tags = {line.strip() for line in generated_tags if line.startswith("#")}
-
-    return tags
-
-def dry_run_generate_tag_list(directory, specific_file=None):
-    all_tags = load_existing_tags()
-    last_run_timestamp = load_last_run_timestamp()
+def update_tag_list(directory: str, specific_file: Optional[str] = None) -> None:
+    all_tags: Set[str] = get_existing_tags()
+    logger.info(f"Existing tags: {all_tags}")
+    last_run_timestamp: float = get_last_run_timestamp()
     
     if specific_file:
-        files_to_process = [specific_file]
+        if is_obsidian_uri(specific_file):
+            specific_file = get_obsidian_file_path(specific_file)
+        files_to_process: List[str] = [specific_file]
     else:
-        files_to_process = []
+        files_to_process: List[str] = []
         for root, _, files in os.walk(directory):
             if any(exclude_dir in root for exclude_dir in excluded_dirs):
                 continue
             for file in files:
                 if file.endswith(".md"):
                     filepath = os.path.join(root, file)
+                    logger.info(f"Checking file: {filepath}")
                     if os.path.getmtime(filepath) > last_run_timestamp:
                         files_to_process.append(filepath)
     
     for filepath in files_to_process:
         with open(filepath, "r") as file_content:
             content = file_content.read()
-            tags = generate_tags(content, all_tags)
+            tags = openai_client.get_relevant_tags(content, all_tags)
             all_tags.update(tags)
             save_tags(all_tags)
 
-    save_current_timestamp()
-    print("Dry run complete! Tag list generated and saved.")
+    update_timestamp()
+    logger.info("Dry run complete! Tag list generated and saved.")
+
